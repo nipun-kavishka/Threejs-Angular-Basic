@@ -20,4 +20,12 @@ export class AppComponent {
     this.engine.animate();
   }
 
+  /**
+   * change the glb model in engine service
+   * @param fileName 
+   */
+  public loadGLB(fileName: string) {
+    this.engine.loadGLB(fileName);
+  }
+
 }

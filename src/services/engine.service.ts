@@ -34,27 +34,42 @@ export class EngineService implements OnDestroy {
       alpha: false,    // transparent background
       antialias: true // smooth edges
     });
-    //set width anf height of the renderer
-    this.renderer.setSize(800, 450);
 
+    const width = window.innerWidth / 1.05;
+    const height = window.innerHeight / 1.05;
+
+    //set width anf height of the renderer
+    this.renderer.setSize(width, height);
+
+    this.setupScene();
+    this.loadGLB("DOMCEK");
+  }
+
+  public setupScene() {
     // create the scene
     this.scene = new THREE.Scene();
 
     this.camera = new THREE.PerspectiveCamera(
       70, window.innerWidth / window.innerHeight, 0.1, 10000
     );
+    //set and adjust camera position
     this.camera.position.z = 6;
-    this.camera.position.y = 3;
+    this.camera.position.y = 2;
     this.scene.add(this.camera);
 
     // soft white light
     this.light = new THREE.AmbientLight(0xffffff);
     this.light.position.z = 10;
     this.scene.add(this.light);
+  }
+
+  loadGLB(fileName: string) {
+    //re create the scene
+    this.setupScene();
 
     //load gltf loader to render model
     var loader = new GLTFLoader();
-    loader.load('../../assets/models/dino.glb', gltf => {
+    loader.load('../../assets/models/' + fileName + '.glb', gltf => {
       this.model = gltf.scene;
       this.scene.add(this.model);
       this.modelStatus = true;
@@ -91,8 +106,8 @@ export class EngineService implements OnDestroy {
   }
 
   public resize(): void {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    const width = window.innerWidth / 1.05;
+    const height = window.innerHeight / 1.05;
 
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();

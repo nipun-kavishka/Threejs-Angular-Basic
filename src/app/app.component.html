@@ -1,8 +1,17 @@
-<div>
-  <p>Select model: </p>
+<br>
+
+<div class="center">
+  <div>
+    <span>Select model: </span> &nbsp;
+    <button (click)="loadGLB('DOMCEK')">3D House</button>&nbsp;
+    <button (click)="loadGLB('Unicorn')">Unicorn</button>&nbsp;
+  </div>
 </div>
-<div class="engine-wrapper" >
-  <canvas #rendererCanvas id="renderCanvas" ></canvas>
+
+<br>
+
+<div class="engine-wrapper center">
+  <canvas #rendererCanvas id="renderCanvas"></canvas>
 </div>
 
 <router-outlet></router-outlet>
